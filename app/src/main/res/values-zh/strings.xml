@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AudioDeviceKitSample</string>
+    <string name="current_device">当前设备：</string>
+    <string name="connection_status">连接状态：</string>
+    <string name="scan">查找</string>
+    <string name="connect">连接</string>
+    <string name="disconnect">断开</string>
+    <string name="send_AT_cmd">发送AT指令</string>
+    <string name="found_device">发现设备</string>
+    <string name="cmd_sent_result">-----指令发送结果------</string>
+    <string name="notify_data">-----主动上报数据------</string>
+    <string name="sensor_data">-----传感器数据上报(共 %1$d 条)------</string>
+
+    <string name="disconnected">已断开连接</string>
+    <string name="not_initialized">未初始化</string>
+    <string name="connecting">连接中</string>
+    <string name="connected">已连接</string>
+    <string name="data_channel_ready">读写通道建立完成</string>
+    <string name="unknown">未知状态 -> </string>
+</resources>

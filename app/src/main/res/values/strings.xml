@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AudioDeviceKit</string>
+    <string name="current_device">Current Device: </string>
+    <string name="connection_status">Connection Status: </string>
+    <string name="scan">Scan Device</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="send_AT_cmd">Send</string>
+    <string name="found_device">Found Devices</string>
+    <string name="cmd_sent_result">------Command Result------</string>
+    <string name="notify_data">-----Response Data-----</string>
+    <string name="sensor_data">-----Sensor data reporting (%1$d)------</string>
+
+    <string name="disconnected">Disconnected</string>
+    <string name="not_initialized">Not initialized</string>
+    <string name="connecting">Connecting</string>
+    <string name="connected">Connected</string>
+    <string name="data_channel_ready">Data channel ready</string>
+    <string name="unknown">unknown -> </string>
+</resources>
