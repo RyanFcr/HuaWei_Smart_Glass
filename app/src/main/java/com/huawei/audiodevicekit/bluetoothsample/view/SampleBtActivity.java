@@ -3,6 +3,9 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -41,10 +44,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.zip.Inflater;
 
 public class SampleBtActivity
         extends BaseAppCompatActivity<SampleBtContract.Presenter, SampleBtContract.View>
-        implements SampleBtContract.View,RecognizeListener {
+        implements SampleBtContract.View
+//        ,RecognizeListener
+{
     private static final String TAG = "SampleBtActivity";
 
     private TextView tvDevice;
@@ -77,11 +83,13 @@ public class SampleBtActivity
 
     private TextView tvDataCount;
 
-    private TextView testblock;
+    private TextView test_block;
 
     private Button switch_media;
 
     public Intent trans;
+
+    public Intent checktrans;
 
     public SampleBtActivity() {
     }
@@ -104,8 +112,8 @@ public class SampleBtActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        VoiceRecognition.instance().init(this);
-        VoiceRecognition.instance().setRecognizeListener(this);
+//        VoiceRecognition.instance().init(this);
+//        VoiceRecognition.instance().setRecognizeListener(this);
     }
 
     @Override
@@ -125,8 +133,25 @@ public class SampleBtActivity
 //        spinner = findViewById(R.id.spinner);
         btnRecognition = findViewById(R.id.btn_recognition);
         rvFoundDevice = findViewById(R.id.found_device);
-        testblock = findViewById(R.id.testblock);
+        test_block = findViewById(R.id.testblock);
         switch_media = findViewById(R.id.switch_media);
+        test_block.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                btnSearch.setText("be");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                btnConnect.setText("on");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                btnDisconnect.setText("af");
+
+            }
+        });
         initSpinner();
         initRecyclerView();
         maps = new ArrayList<>();
@@ -195,7 +220,7 @@ public class SampleBtActivity
             }
         });
 
-        btnRecognition.setOnClickListener(VoiceRecognition.instance());
+//        btnRecognition.setOnClickListener(VoiceRecognition.instance());
     }
 
     @Override
@@ -228,17 +253,17 @@ public class SampleBtActivity
                     .setText(String.format("[%s] %s", device.getAddress(), "HUAWEI Eyewear")));
             Class<ATCmdApi> atCmdApiClass = ATCmdApi.class;
             try{
-                testblock.setText("first");
+//                test_block.setText("first");
                 atCmdApiClass.getMethod("sensorUploadOpen", String.class, IRspListener.class).
                         invoke(ATCmdApi.getInstance(), mMac, new IRspListener<Object>() {
                             @Override
                             public void onSuccess(Object o) {
-                                testblock.setText("success");
+//                                test_block.setText("success");
                             }
 
                             @Override
                             public void onFailed(int i) {
-                                testblock.setText("failed");
+//                                test_block.setText("failed");
 
                             }
                         });
@@ -266,6 +291,12 @@ public class SampleBtActivity
             map.put("data", sensorData.toString());
             maps.add(0, map);
             simpleAdapter.notifyDataSetChanged();
+            LayoutInflater ltep = (LayoutInflater)
+                    SampleBtActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View vtep = ltep.inflate(R.layout.m_activity_main,null);
+            Button tep = vtep.findViewById(R.id.playbutton);
+            Integer inttep = sensorData.getKnockDetect();
+            tep.setText(inttep.toString());
 //            if(sensorData.getSensorType()%16>=8){
 //                testblock.setText("test vic");
 //            }else{
@@ -300,19 +331,28 @@ public class SampleBtActivity
         getPresenter().deInit();
         VoiceRecognition.instance().release();
     }
-    @Override
+//    @Override
     public void onNewResult(String result) {
-
+//            if(trans!=null){
+//                trans.putExtra("ctrl1",result);
+                if (result!=null && !(result.equals(""))){
+                    test_block.setText(result);
+                }
+//                if (checktrans!=trans){
+//                    checktrans = trans;
+//                    startActivity(trans);
+//                }
+//            }
 //        tvSendCmdResult.append(result);
     }
 
-    @Override
-    public void onTotalResult(String result,boolean isLast) {
-//        tvSendCmdResult.append(result);
-    }
+//    @Override
+//    public void onTotalResult(String result,boolean isLast) {
+////        tvSendCmdResult.append(result);
+//    }
 
-    @Override
-    public void onError(SpeechError speechError) {
-        Toast.makeText(this,"出错了 $speechError",Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onError(SpeechError speechError) {
+//        Toast.makeText(this,"出错了 $speechError",Toast.LENGTH_SHORT).show();
+//    }
 }
