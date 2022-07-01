@@ -2,6 +2,8 @@ package com.huawei.audiodevicekit.mediaplayer.view;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.SimpleAdapter;
@@ -9,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+import android.widget.Toolbar;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -31,10 +34,22 @@ import com.huawei.audiobluetooth.layer.protocol.mbb.DeviceInfo;
 import com.huawei.audiobluetooth.utils.LocaleUtils;
 import com.huawei.audiobluetooth.utils.LogUtils;
 import com.huawei.audiodevicekit.R;
+import com.huawei.audiodevicekit.bluetoothsample.model.RecognizeListener;
 import com.huawei.audiodevicekit.mediaplayer.contract.BtContract;
 import com.huawei.audiodevicekit.mediaplayer.presenter.BtPresenter;
 import com.huawei.audiodevicekit.mediaplayer.view.adapter.SingleChoiceAdapter;
 import com.huawei.audiodevicekit.mvp.view.support.BaseAppCompatActivity;
+import com.huawei.audiodevicekit.bluetoothsample.view.SampleBtActivity;
+import com.huawei.audiodevicekit.mediaplayer.model.VoiceRecognition;
+import com.iflytek.cloud.InitListener;
+//import com.iflytek.cloud.RecognizerListener;
+import com.iflytek.cloud.RecognizerListener;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.speech.util.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -45,15 +60,18 @@ import java.util.Map;
 
 public class BtActivity
         extends BaseAppCompatActivity<BtContract.Presenter, BtContract.View>
-        implements BtContract.View {
+        implements BtContract.View , RecognizerListener {
     private static final String TAG = "BtActivity";
 
     private String mMac;
 
+
     private List<Map<String, String>> maps;
 
+    private RecognizeListener recognizeListener;
 //    private SimpleAdapter simpleAdapter;
 //
+    private StringBuffer charBufffer = new StringBuffer();
 
     private VideoView mVideoView;
     private Button playBtn, stopBtn;
@@ -111,6 +129,21 @@ public class BtActivity
 //        }
 //        return result;
 //    }
+
+    /**
+     * 获取状态栏高度
+     */
+    public static double getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        //获取status_bar_height资源的ID
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            //根据资源ID获取响应的尺寸值
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
+
     class mClick implements OnClickListener {
         @Override
         public void onClick(View v) {
@@ -125,7 +158,17 @@ public class BtActivity
             int videoViewheight = mVideoView.getHeight();
             //获取屏幕的高度
             int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-            mMediaController.setPadding(0, 0, 0, screenHeight-videoViewheight);
+
+
+            double statusBarHeight = getStatusBarHeight(getContext());
+            mMediaController.setPadding(0, 0, 0, (int) (screenHeight-videoViewheight-statusBarHeight));
+//            DisplayMetrics dm = new DisplayMetrics();
+//            getWindowManager().getDefaultDisplay().getMetrics(dm);
+//            //应用区域
+//            Rect outRect1 = new Rect();
+//            getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect1);
+//            int statusBar = dm.heightPixels - outRect1.height();
+//
 
             if (v == playBtn) {
                 mVideoView.start();
@@ -280,6 +323,59 @@ public class BtActivity
 //        });
     }
 
+
+    @Override
+    public void onVolumeChanged(int i, byte[] bytes) {
+
+    }
+
+    @Override
+    public void onBeginOfSpeech() {
+
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+
+    }
+
+    public void setRecognizeListener(RecognizeListener recognizeListener) {
+        this.recognizeListener = recognizeListener;
+    }
+
+    @Override
+    public void onResult(RecognizerResult recognizerResult, boolean b) {
+        if (recognizeListener != null) {
+            String text = JsonParser.parseIatResult(recognizerResult.getResultString());
+            String sn = null;
+            // 读取json结果中的sn字段
+            try {
+                JSONObject resultJson = new JSONObject(recognizerResult.getResultString());
+                sn = resultJson.optString("sn");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (!TextUtils.isEmpty(text)) {
+                charBufffer.append(text);
+            }
+            if(text.equals("你好")){
+                Log.d(TAG, "onResult: 牛");
+
+            }
+
+            //recognizeListener.onTotalResult(charBufffer.toString(), iat.isListening());
+        }
+    }
+
+    @Override
+    public void onError(SpeechError speechError) {
+        Toast.makeText(this,"出错了 $speechError",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onEvent(int i, int i1, int i2, Bundle bundle) {
+
+    }
 
     @Override
     public void onError(String errorMsg) {

@@ -1,5 +1,4 @@
 package com.huawei.audiodevicekit.bluetoothsample.view;
-//package xyz.doikki.videoplayer;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
