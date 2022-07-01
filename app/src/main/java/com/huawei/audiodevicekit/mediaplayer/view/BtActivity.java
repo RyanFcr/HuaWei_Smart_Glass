@@ -89,7 +89,10 @@ public class BtActivity
         stopBtn = (Button) findViewById(R.id.stopbutton);
         playBtn.setOnClickListener(new mClick());
         stopBtn.setOnClickListener(new mClick());
+
+//        mMediaController.setPrevNextListeners(mVideoView.setOnClickListener(););
     }
+
 
     class mClick implements OnClickListener {
         @Override
