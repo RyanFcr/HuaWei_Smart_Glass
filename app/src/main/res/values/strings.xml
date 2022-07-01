@@ -18,4 +18,5 @@
     <string name="connected">Connected</string>
     <string name="data_channel_ready">Data channel ready</string>
     <string name="unknown">unknown -> </string>
+    <string name="switch_media">SWITCH</string>
 </resources>

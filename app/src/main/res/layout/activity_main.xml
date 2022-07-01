@@ -151,6 +151,14 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/found_device"
         tools:layout_editor_absoluteX="8dp" />
+    <Button
+        android:id = "@+id/switch_media"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/switch_media"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/testblock"
+        tools:ignore="MissingConstraints" />
 
 
 
@@ -160,6 +168,7 @@
             android:layout_height="wrap_content"
             android:text="VOICE RECOGNITION"
             tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="32dp" />
+            tools:layout_editor_absoluteY="32dp"
+            tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

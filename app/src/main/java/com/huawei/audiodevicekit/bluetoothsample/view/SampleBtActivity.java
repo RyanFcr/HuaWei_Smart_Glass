@@ -1,6 +1,7 @@
 package com.huawei.audiodevicekit.bluetoothsample.view;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +31,7 @@ import com.huawei.audiodevicekit.bluetoothsample.model.VoiceRecognition;
 import com.huawei.audiodevicekit.bluetoothsample.contract.SampleBtContract;
 import com.huawei.audiodevicekit.bluetoothsample.presenter.SampleBtPresenter;
 import com.huawei.audiodevicekit.bluetoothsample.view.adapter.SingleChoiceAdapter;
+import com.huawei.audiodevicekit.mediaplayer.view.BtActivity;
 import com.huawei.audiodevicekit.mvp.view.support.BaseAppCompatActivity;
 import com.iflytek.cloud.SpeechError;
 
@@ -57,9 +59,9 @@ public class SampleBtActivity
 
     private Button btnDisconnect;
 
+
     private Button btnRecognition;
 
-    private Spinner spinner;
 
     private RecyclerView rvFoundDevice;
 
@@ -76,6 +78,10 @@ public class SampleBtActivity
     private TextView tvDataCount;
 
     private TextView testblock;
+
+    private Button switch_media;
+
+    public Intent trans;
 
     public SampleBtActivity() {
     }
@@ -120,6 +126,7 @@ public class SampleBtActivity
         btnRecognition = findViewById(R.id.btn_recognition);
         rvFoundDevice = findViewById(R.id.found_device);
         testblock = findViewById(R.id.testblock);
+        switch_media = findViewById(R.id.switch_media);
         initSpinner();
         initRecyclerView();
         maps = new ArrayList<>();
@@ -141,29 +148,6 @@ public class SampleBtActivity
             }
         }
     }
-//        spinner.setAdapter(
-//            new SimpleAdapter(this, data, R.layout.item_spinner, new String[] {"title"},
-//                new int[] {R.id.tv_name}));
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                LogUtils.i(TAG, "onItemSelected position = " + position);
-//                String title = data.get(position).get("title");
-//                String type = Objects.requireNonNull(title).split("-")[0];
-//                try {
-//                    int typeValue = Integer.parseInt(type);
-//                    mATCmd = Cmd.getATCmdByType(typeValue);
-//                } catch (NumberFormatException e) {
-//                    LogUtils.e(TAG, "parseInt fail e = " + e);
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                LogUtils.i(TAG, "onNothingSelected parent = " + parent);
-//            }
-//        });
-//    }
 
     private void initRecyclerView() {
         SingleChoiceAdapter.SaveOptionListener mOptionListener = new SingleChoiceAdapter.SaveOptionListener() {
@@ -201,6 +185,16 @@ public class SampleBtActivity
         btnConnect.setOnClickListener(v -> getPresenter().connect(mMac));
         btnDisconnect.setOnClickListener(v -> getPresenter().disConnect(mMac));
         btnSearch.setOnClickListener(v -> getPresenter().checkLocationPermission(this));
+        switch_media.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trans = new Intent(SampleBtActivity.this, BtActivity.class);
+
+//                startActivityForResult(MediaIntent,1);
+                startActivity(trans);
+            }
+        });
+
         btnRecognition.setOnClickListener(VoiceRecognition.instance());
     }
 
@@ -272,11 +266,23 @@ public class SampleBtActivity
             map.put("data", sensorData.toString());
             maps.add(0, map);
             simpleAdapter.notifyDataSetChanged();
-            if(sensorData.getCapSensorDataLen()!=0){
-                testblock.setText("test vic");
-            }else{
-                testblock.setText("test vic too");
-            }
+//            if(sensorData.getSensorType()%16>=8){
+//                testblock.setText("test vic");
+//            }else{
+//                long[] var2 = sensorData.getCapSensorData();
+//                if (var_com!=var2){
+//                    var_com = var2;
+//                    testblock.setText("gotit");
+//                }
+//            }
+//            if(trans!=null){
+//                int datasend = sensorData.getSensorType();
+//                trans.putExtra("ctrl1",datasend);
+//                if (checktrans!=trans){
+//                    checktrans = trans;
+//                    startActivity(trans);
+//                }
+//            }
         });
     }
 

@@ -18,4 +18,5 @@
     <string name="connected">已连接</string>
     <string name="data_channel_ready">读写通道建立完成</string>
     <string name="unknown">未知状态 -> </string>
+    <string name="switch_media">视频</string>
 </resources>
