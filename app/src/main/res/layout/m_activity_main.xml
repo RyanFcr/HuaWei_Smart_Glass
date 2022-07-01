@@ -7,21 +7,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Video Player"
-            android:textSize="30sp"
-            android:layout_marginTop="20dp"/>
 
     <VideoView
         android:id="@+id/video"
         android:layout_width="wrap_content"
+<<<<<<< HEAD
         android:layout_height="200dp"
+=======
+        android:layout_height="250dp"
+>>>>>>> 80dcf3866350bc168c8ccea8373b628a90d341ac
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"/>/>
+        android:layout_marginTop="5dp"/>/>
 
     <LinearLayout
             android:layout_width="wrap_content"

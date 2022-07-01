@@ -77,6 +77,8 @@ public class BtActivity
         return this;
     }
 
+//
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +95,26 @@ public class BtActivity
 //        mMediaController.setPrevNextListeners(mVideoView.setOnClickListener(););
     }
 
+<<<<<<< HEAD
 
+=======
+//状态栏的高度
+    //    int statusBarHeight = getStatusBarHeight();
+//    /**
+//     * 获得状态栏的高度
+//     *
+//     * @param
+//     * @return
+//     */
+//    public int getStatusBarHeight() {
+//        int result = 0;
+//        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+//        if (resourceId > 0) {
+//            result = getResources().getDimensionPixelSize(resourceId);
+//        }
+//        return result;
+//    }
+>>>>>>> 80dcf3866350bc168c8ccea8373b628a90d341ac
     class mClick implements OnClickListener {
         @Override
         public void onClick(View v) {
@@ -103,6 +124,13 @@ public class BtActivity
             //mVideoView.setVideoURI(Uri.parse(uri2));  //网络
             mMediaController.setMediaPlayer(mVideoView);
             mVideoView.setMediaController(mMediaController);
+
+            //        int toolBar =.getHeight();
+            int videoViewheight = mVideoView.getHeight();
+            //获取屏幕的高度
+            int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+            mMediaController.setPadding(0, 0, 0, screenHeight-videoViewheight);
+
             if (v == playBtn) {
                 mVideoView.start();
             } else if (v == stopBtn) {
