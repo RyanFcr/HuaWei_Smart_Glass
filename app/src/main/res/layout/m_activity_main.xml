@@ -11,11 +11,8 @@
     <VideoView
         android:id="@+id/video"
         android:layout_width="wrap_content"
-<<<<<<< HEAD
-        android:layout_height="200dp"
-=======
+
         android:layout_height="250dp"
->>>>>>> 80dcf3866350bc168c8ccea8373b628a90d341ac
         android:layout_gravity="center"
         android:layout_marginTop="5dp"/>/>
 

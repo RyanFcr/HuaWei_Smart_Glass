@@ -95,26 +95,7 @@ public class BtActivity
 //        mMediaController.setPrevNextListeners(mVideoView.setOnClickListener(););
     }
 
-<<<<<<< HEAD
 
-=======
-//状态栏的高度
-    //    int statusBarHeight = getStatusBarHeight();
-//    /**
-//     * 获得状态栏的高度
-//     *
-//     * @param
-//     * @return
-//     */
-//    public int getStatusBarHeight() {
-//        int result = 0;
-//        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-//        if (resourceId > 0) {
-//            result = getResources().getDimensionPixelSize(resourceId);
-//        }
-//        return result;
-//    }
->>>>>>> 80dcf3866350bc168c8ccea8373b628a90d341ac
     class mClick implements OnClickListener {
         @Override
         public void onClick(View v) {

@@ -60,12 +60,9 @@ public class SampleBtActivity
 
     private Button btnDisconnect;
 
-<<<<<<< HEAD
-=======
+
     private Button btnRecognition;
 
-    private Spinner spinner;
->>>>>>> 80dcf3866350bc168c8ccea8373b628a90d341ac
 
     private RecyclerView rvFoundDevice;
 
@@ -189,7 +186,6 @@ public class SampleBtActivity
         btnConnect.setOnClickListener(v -> getPresenter().connect(mMac));
         btnDisconnect.setOnClickListener(v -> getPresenter().disConnect(mMac));
         btnSearch.setOnClickListener(v -> getPresenter().checkLocationPermission(this));
-<<<<<<< HEAD
         switch_media.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,9 +196,7 @@ public class SampleBtActivity
             }
         });
 
-=======
         btnRecognition.setOnClickListener(VoiceRecognition.instance());
->>>>>>> 80dcf3866350bc168c8ccea8373b628a90d341ac
     }
 
     @Override

@@ -168,6 +168,7 @@
             android:layout_height="wrap_content"
             android:text="VOICE RECOGNITION"
             tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="32dp" />
+            tools:layout_editor_absoluteY="32dp"
+            tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
