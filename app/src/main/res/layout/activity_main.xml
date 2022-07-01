@@ -134,6 +134,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_send_cmd"
         tools:layout_editor_absoluteX="8dp" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/found_device"
         android:layout_width="match_parent"
@@ -153,5 +154,12 @@
 
 
 
+        <Button
+            android:id="@+id/btn_recognition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOICE RECOGNITION"
+            tools:layout_editor_absoluteX="23dp"
+            tools:layout_editor_absoluteY="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
