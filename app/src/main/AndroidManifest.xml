@@ -27,8 +27,11 @@
 <!--              android:theme="@style/AppTheme"&ndash;&gt;-->
 <!--              android:requestLegacyExternalStorage="true">&ndash;&gt;-->
 
-        <activity android:name=".mediaplayer.view.BtActivity"
+        <activity
+            android:name=".bluetoothsample.view.SampleBtActivity"
+
             android:exported="true">
+<!--            android:name=".mediaplayer.view.BtActivity"-->
           <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +39,10 @@
           </intent-filter>
         </activity>
 
-    <activity android:name=".bluetoothsample.view.SampleBtActivity"
-      android:exported="true">
+    <activity
+        android:name=".mediaplayer.view.BtActivity"
+        android:exported="true">
+<!--        android:name=".bluetoothsample.view.SampleBtActivity"-->
 <!--      <intent-filter>-->
 <!--        <action android:name="android.intent.action.MAIN" />-->
 
