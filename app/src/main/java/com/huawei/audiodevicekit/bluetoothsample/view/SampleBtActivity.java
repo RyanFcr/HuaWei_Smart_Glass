@@ -24,9 +24,12 @@ import com.huawei.audiobluetooth.utils.LocaleUtils;
 import com.huawei.audiobluetooth.utils.LogUtils;
 import com.huawei.audiodevicekit.R;
 import com.huawei.audiodevicekit.bluetoothsample.contract.SampleBtContract;
+import com.huawei.audiodevicekit.bluetoothsample.model.RecognizeListener;
+import com.huawei.audiodevicekit.bluetoothsample.model.VoiceRecognition;
 import com.huawei.audiodevicekit.bluetoothsample.presenter.SampleBtPresenter;
 import com.huawei.audiodevicekit.bluetoothsample.view.adapter.SingleChoiceAdapter;
 import com.huawei.audiodevicekit.mvp.view.support.BaseAppCompatActivity;
+import com.iflytek.cloud.SpeechError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +39,7 @@ import java.util.Objects;
 
 public class SampleBtActivity
     extends BaseAppCompatActivity<SampleBtContract.Presenter, SampleBtContract.View>
-    implements SampleBtContract.View {
+    implements SampleBtContract.View , RecognizeListener{
     private static final String TAG = "SampleBtActivity";
 
     private TextView tvDevice;
@@ -56,6 +59,8 @@ public class SampleBtActivity
     private Spinner spinner;
 
     private Button btnSendCmd;
+
+    private Button btnRecognition;
 
     private RecyclerView rvFoundDevice;
 
@@ -89,6 +94,8 @@ public class SampleBtActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VoiceRecognition.instance().init(this);
+        VoiceRecognition.instance().setRecognizeListener(this);
     }
 
     @Override
@@ -108,6 +115,7 @@ public class SampleBtActivity
         btnDisconnect = findViewById(R.id.btn_disconnect);
         spinner = findViewById(R.id.spinner);
         btnSendCmd = findViewById(R.id.btn_send_cmd);
+        btnRecognition = findViewById(R.id.btn_recognition);
         rvFoundDevice = findViewById(R.id.found_device);
         initSpinner();
         initRecyclerView();
@@ -189,6 +197,7 @@ public class SampleBtActivity
         btnDisconnect.setOnClickListener(v -> getPresenter().disConnect(mMac));
         btnSendCmd.setOnClickListener(v -> getPresenter().sendCmd(mMac, mATCmd.getType()));
         btnSearch.setOnClickListener(v -> getPresenter().checkLocationPermission(this));
+        btnRecognition.setOnClickListener(VoiceRecognition.instance());
     }
 
     @Override
@@ -258,5 +267,21 @@ public class SampleBtActivity
     protected void onDestroy() {
         super.onDestroy();
         getPresenter().deInit();
+        VoiceRecognition.instance().release();
+    }
+
+    @Override
+    public void onNewResult(String result) {
+        tvSendCmdResult.append(result);
+    }
+
+    @Override
+    public void onTotalResult(String result,boolean isLast) {
+        tvSendCmdResult.append(result);
+    }
+
+    @Override
+    public void onError(SpeechError speechError) {
+        Toast.makeText(this,"出错了 $speechError",Toast.LENGTH_SHORT).show();
     }
 }
