@@ -52,10 +52,8 @@ public class BtActivity
 
     private List<Map<String, String>> maps;
 
-    private SimpleAdapter simpleAdapter;
-
-
-    private TextView testblock;
+//    private SimpleAdapter simpleAdapter;
+//
 
     private VideoView mVideoView;
     private Button playBtn, stopBtn;
@@ -242,17 +240,17 @@ public class BtActivity
 
     @Override
     public void onSensorDataChanged(SensorData sensorData) {
-        runOnUiThread(() -> {
-            Map<String, String> map = new HashMap<>();
-            map.put("data", sensorData.toString());
-            maps.add(0, map);
-            simpleAdapter.notifyDataSetChanged();
-            if (sensorData.getCapSensorDataLen() != 0) {
-                testblock.setText("test vic");
-            } else {
-                testblock.setText("test vic too");
-            }
-        });
+//        runOnUiThread(() -> {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("data", sensorData.toString());
+//            maps.add(0, map);
+//            simpleAdapter.notifyDataSetChanged();
+//            if (sensorData.getCapSensorDataLen() != 0) {
+//                testblock.setText("test vic");
+//            } else {
+//                testblock.setText("test vic too");
+//            }
+//        });
     }
 
 
