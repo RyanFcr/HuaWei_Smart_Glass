@@ -113,7 +113,6 @@ public class BtActivity
 //        mMediaController.setPrevNextListeners(mVideoView.setOnClickListener(););
     }
 
-<<<<<<< HEAD
 //状态栏的高度
     //    int statusBarHeight = getStatusBarHeight();
 //    /**
@@ -144,8 +143,6 @@ public class BtActivity
         }
         return statusBarHeight;
     }
-=======
->>>>>>> 54c39f590773fea91dc0cc5803b3700569160c2c
 
     class mClick implements OnClickListener {
         @Override
