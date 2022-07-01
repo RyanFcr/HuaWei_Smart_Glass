@@ -4,171 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/img_5"
     tools:context=".bluetoothsample.view.SampleBtActivity">
 
-    <LinearLayout
-        android:id="@+id/item_device"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="342dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="40dp"
+        android:background="@mipmap/img_4"
+        app:layout_constraintBottom_toTopOf="@+id/btn_connect"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/current_device"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_device"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textSize="16sp"
-            tools:text="[xx:xx:xx] Evian001" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/item_status"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="342dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="508dp"
+        android:background="@mipmap/img_3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_device">
+        tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/connection_status"
-            android:textSize="16sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/found_device"
+        android:layout_width="166dp"
+        android:layout_height="53dp"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="308dp"
+        app:layout_constraintTop_toTopOf="@id/btn_connect"/>
 
-        <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            tools:text="@string/disconnected" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/ll_search"
+    <TextView
+        android:id="@+id/tv_device"
         android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_status">
+        android:layout_height="0dp" />
 
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/scan" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_connect"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_search">
-
-        <Button
-            android:id="@+id/btn_connect"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/connect" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_disconnect"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_connect">
-
-        <Button
-            android:id="@+id/btn_disconnect"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/disconnect" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="413dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/switch_media"
+        app:layout_constraintTop_toBottomOf="@+id/btn_connect"
+        app:layout_constraintVertical_bias="0.746"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
         android:id="@+id/ll_send_cmd"
         android:layout_width="0dp"
         android:layout_height="54dp"
+        android:layout_marginTop="364dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_disconnect"/>
-
-    <TextView
-        android:id="@+id/search_status"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="@string/found_device"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/ll_send_cmd"
-        tools:layout_editor_absoluteX="8dp" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/found_device"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/search_status" />
-
-    <TextView
-        android:id="@+id/testblock"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="@string/found_device"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/found_device"
-        tools:layout_editor_absoluteX="8dp" />
-    <Button
-        android:id = "@+id/switch_media"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="@string/switch_media"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/testblock"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/switch_media"
+        android:layout_width="413dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="32dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_recognition"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp" />
 
-
-        <Button
-            android:id="@+id/btn_recognition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VOICE RECOGNITION"
-            tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="32dp"
-            tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/btn_recognition"
+        android:layout_width="413dp"
+        android:layout_height="58dp"
+        android:gravity="center"
+        android:text="VOICE RECOGNITION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_connect"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

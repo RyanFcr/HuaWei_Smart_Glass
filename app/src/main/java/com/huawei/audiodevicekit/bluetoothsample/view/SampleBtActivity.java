@@ -77,7 +77,7 @@ public class SampleBtActivity
 
     private TextView tvDataCount;
 
-    private TextView testblock;
+    //private TextView testblock;
 
     private Button switch_media;
 
@@ -116,7 +116,7 @@ public class SampleBtActivity
     @Override
     protected void initView() {
         tvDevice = findViewById(R.id.tv_device);
-        tvStatus = findViewById(R.id.tv_status);
+        //tvStatus = findViewById(R.id.tv_status);
 //        tvDataCount = findViewById(R.id.tv_data_count);
 //        listView = findViewById(R.id.listview);
         btnSearch = findViewById(R.id.btn_search);
@@ -125,14 +125,14 @@ public class SampleBtActivity
 //        spinner = findViewById(R.id.spinner);
         btnRecognition = findViewById(R.id.btn_recognition);
         rvFoundDevice = findViewById(R.id.found_device);
-        testblock = findViewById(R.id.testblock);
+        //testblock = findViewById(R.id.testblock);
         switch_media = findViewById(R.id.switch_media);
         initSpinner();
         initRecyclerView();
         maps = new ArrayList<>();
         simpleAdapter = new SimpleAdapter(this, maps, android.R.layout.simple_list_item_1,
                 new String[] {"data"}, new int[] {android.R.id.text1});
-//        listView.setAdapter(simpleAdapter);
+        //listView.setAdapter(simpleAdapter);
         int a=0;
     }
 
@@ -173,6 +173,8 @@ public class SampleBtActivity
         rvFoundDevice.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         rvFoundDevice.setAdapter(mAdapter);
     }
+
+
 
     @Override
     protected void initData() {
@@ -221,12 +223,14 @@ public class SampleBtActivity
         }
     }
 
+
     @Override
     public void onDeviceChanged(BluetoothDevice device) {
         if (tvDevice != null) {
             runOnUiThread(() -> tvDevice
                     .setText(String.format("[%s] %s", device.getAddress(), "HUAWEI Eyewear")));
             Class<ATCmdApi> atCmdApiClass = ATCmdApi.class;
+            /*
             try{
                 testblock.setText("first");
                 atCmdApiClass.getMethod("sensorUploadOpen", String.class, IRspListener.class).
@@ -249,15 +253,22 @@ public class SampleBtActivity
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
+
+             */
         }
     }
 
     @Override
     public void onConnectStateChanged(String stateInfo) {
+
         if (tvStatus != null) {
             runOnUiThread(() -> tvStatus.setText(stateInfo));
         }
+
+
     }
+
+
 
     @Override
     public void onSensorDataChanged(SensorData sensorData) {

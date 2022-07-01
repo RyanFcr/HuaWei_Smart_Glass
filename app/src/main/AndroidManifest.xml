@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.huawei.audiodevicekit">
+    package="com.huawei.audiodevicekit">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
-  <uses-permission android:name="android.permission.BLUETOOTH" />
-  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-  <uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.READ_CONTACTS" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_audio_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_audio_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".NotConnected"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-  <application
-          android:name=".MyApplication"
-          android:allowBackup="false"
-          android:icon="@mipmap/ic_audio_logo"
-          android:label="@string/app_name"
-          android:roundIcon="@mipmap/ic_audio_logo"
-          android:supportsRtl="true"
-          android:theme="@style/AppTheme">
-
-<!--              android:allowBackup="true"&ndash;&gt;-->
-<!--              android:icon="@mipmap/ic_launcher"&ndash;&gt;-->
-<!--              android:label="@string/app_name"&ndash;&gt;-->
-<!--              android:roundIcon="@mipmap/ic_launcher_round"&ndash;&gt;-->
-<!--              android:supportsRtl="true"&ndash;&gt;-->
-<!--              android:theme="@style/AppTheme"&ndash;&gt;-->
-<!--              android:requestLegacyExternalStorage="true">&ndash;&gt;-->
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- android:allowBackup="true"&ndash;&gt; -->
+        <!-- android:icon="@mipmap/ic_launcher"&ndash;&gt; -->
+        <!-- android:label="@string/app_name"&ndash;&gt; -->
+        <!-- android:roundIcon="@mipmap/ic_launcher_round"&ndash;&gt; -->
+        <!-- android:supportsRtl="true"&ndash;&gt; -->
+        <!-- android:theme="@style/AppTheme"&ndash;&gt; -->
+        <!-- android:requestLegacyExternalStorage="true">&ndash;&gt; -->
         <activity
             android:name=".bluetoothsample.view.SampleBtActivity"
-
+            android:exported="true" /> <!-- android:name=".mediaplayer.view.BtActivity" -->
+        <activity
+            android:name=".mediaplayer.view.BtActivity"
             android:exported="true">
-<!--            android:name=".mediaplayer.view.BtActivity"-->
-          <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
+            <!-- android:name=".bluetoothsample.view.SampleBtActivity" -->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
-    <activity
-        android:name=".mediaplayer.view.BtActivity"
-        android:exported="true">
-<!--        android:name=".bluetoothsample.view.SampleBtActivity"-->
-<!--      <intent-filter>-->
-<!--        <action android:name="android.intent.action.MAIN" />-->
-
-<!--        <category android:name="android.intent.category.LAUNCHER" />-->
-<!--      </intent-filter>-->
-    </activity>
-
-  </application>
+    </application>
 
 </manifest>
