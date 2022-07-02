@@ -28,6 +28,7 @@ import com.huawei.audiobluetooth.utils.BluetoothUtils;
 import com.huawei.audiobluetooth.utils.DateUtils;
 import com.huawei.audiobluetooth.utils.LocaleUtils;
 import com.huawei.audiobluetooth.utils.LogUtils;
+import com.huawei.audiodevicekit.NotConnected;
 import com.huawei.audiodevicekit.R;
 import com.huawei.audiodevicekit.bluetoothsample.model.RecognizeListener;
 import com.huawei.audiodevicekit.bluetoothsample.model.VoiceRecognition;
@@ -87,9 +88,13 @@ public class SampleBtActivity
 
     private Button switch_media;
 
+    private Button btnrank;
+
     public Intent trans;
 
     public Intent checktrans;
+
+
 
     public SampleBtActivity() {
     }
@@ -135,6 +140,7 @@ public class SampleBtActivity
         rvFoundDevice = findViewById(R.id.found_device);
 //        test_block = findViewById(R.id.testblock);
         switch_media = findViewById(R.id.switch_media);
+        btnrank = findViewById(R.id.btnrank);
 //        test_block.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -220,6 +226,16 @@ public class SampleBtActivity
 
 //                startActivityForResult(MediaIntent,1);
                 startActivity(trans);
+            }
+        });
+        btnrank.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(SampleBtActivity.this, rankActivity.class);
+                startActivity(intent);
+
             }
         });
 
