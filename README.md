@@ -46,7 +46,7 @@ Users should first build APK in Android Studio and install it. In App, Users can
 
 ### Contribution
 
-- Fcr：主要负责视频播放器
-- Zxy：主要负责语音处理
-- Hxl：主要负责进度条控制
+- Fcr：主要负责视频播放器 100
+- Zxy：主要负责语音处理 100
+- Hxl：主要负责进度条控制 100
 - UI 由三位共同完成
