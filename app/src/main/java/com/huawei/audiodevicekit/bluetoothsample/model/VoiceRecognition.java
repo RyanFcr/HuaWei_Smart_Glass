@@ -2,12 +2,14 @@ package com.huawei.audiodevicekit.bluetoothsample.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.huawei.audiodevicekit.mediaplayer.view.BtActivity;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerListener;
@@ -140,7 +142,10 @@ public class VoiceRecognition extends Activity implements View.OnClickListener, 
 
 
     private String printResult(RecognizerResult results) {
+//        Intent sendtext = new Intent(this,BtActivity.class);
         String text = JsonParser.parseIatResult(results.getResultString());
+//        sendtext.putExtra("text_send",text);
+//        startActivity(sendtext);
         Log.d(TAG, "printResult " + text + " isListening " + iat.isListening());
         String sn = null;
         // 读取json结果中的sn字段

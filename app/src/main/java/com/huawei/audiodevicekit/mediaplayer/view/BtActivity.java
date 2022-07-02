@@ -1,10 +1,19 @@
 package com.huawei.audiodevicekit.mediaplayer.view;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.SynthesisCallback;
+import android.speech.tts.SynthesisRequest;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeechService;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -55,12 +64,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
 public class BtActivity
         extends BaseAppCompatActivity<BtContract.Presenter, BtContract.View>
-        implements BtContract.View , RecognizerListener {
+        implements BtContract.View,com.huawei.audiodevicekit.bluetoothsample.model.RecognizeListener {
     private static final String TAG = "BtActivity";
 
     private String mMac;
@@ -75,11 +85,21 @@ public class BtActivity
 
     private VideoView mVideoView;
     private Button playBtn, stopBtn;
+    private TextView testbar;
+    private int pos = 0;
+    private int mov1 = 20000;
+    private int mov2 = 25000;
+    private int mov3 = 40000;
     MediaController mMediaController;
 
     public BtActivity() {
     }
-
+//    public TextToSpeech tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//        @Override
+//        public void onInit(int i) {
+//
+//        }
+//    });
     @Override
     public Context getContext() {
         return this;
@@ -100,6 +120,8 @@ public class BtActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        com.huawei.audiodevicekit.bluetoothsample.model.VoiceRecognition.instance().init(this);
+//        com.huawei.audiodevicekit.bluetoothsample.model.VoiceRecognition.instance().setRecognizeListener(this);
         setContentView(R.layout.m_activity_main);
         LogUtils.i(TAG, "onItemSelected position = ");
         mVideoView = new VideoView(this);
@@ -108,10 +130,139 @@ public class BtActivity
         playBtn = (Button) findViewById(R.id.playbutton);
         stopBtn = (Button) findViewById(R.id.stopbutton);
         playBtn.setOnClickListener(new mClick());
-        stopBtn.setOnClickListener(new mClick());
+        Intent data_get;
+        stopBtn.setOnClickListener(
+//                new mClick()
+                VoiceRecognition.instance()
+        );
+//        LayoutInflater inflater = (LayoutInflater) this
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View test_view = inflater.inflate(R.layout.activity_main,null);
+//        testbar = test_view.findViewById(R.id.testblock);
+//        VoiceRecognition.instance();
+//        if (testbar==null){
+//            int a=0;
+//            playBtn.setText("zhaobudao");
+//        }else{
+//            playBtn.setText("zhaodaole");
+//        }
+        VoiceRecognition.instance().init(this);
+        VoiceRecognition.instance().setRecognizeListener(this);
+        playBtn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                playBtn.setText("before");
+//                mVideoView.pause();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                playBtn.setText("on");
+//                mVideoView.pause();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.equals("2")){
+                    int end  =mVideoView.getDuration();
+                    int cur = mVideoView.getCurrentPosition();
+                    int targe = (cur+5000>end)
+                            ?end:(cur+5000);
+                    mVideoView.seekTo(targe);
+                    stopBtn.setText("2");
+                }
+//                playBtn.setText("after");
+//                if(editable.equals("暂停")){
+//                    mVideoView.pause();
+//                }else if (editable.equals("继续")){
+//                    mVideoView.resume();
+//                }else{
+////                    mVideoView.pause();
+//                }
+            }
+        });
+
 
 //        mMediaController.setPrevNextListeners(mVideoView.setOnClickListener(););
     }
+    @Override
+    public void onNewResult(String result) {
+        if (result!=null && !(result.equals(""))){
+            if (result.equals(" stop")){
+                mVideoView.pause();
+                stopBtn.setText(result);
+            }else if (result.equals(" continue")){
+                mVideoView.start();
+                stopBtn.setText(result);
+            }else if (result.equals(" jump")||result.equals(" Jump")){
+                mVideoView.seekTo(30000);
+                stopBtn.setText(result);
+            }else if (result.equals(" resume")){
+                mVideoView.seekTo(0);
+                stopBtn.setText(result);
+            }else if (result.equals(" reserve")){
+                pos = mVideoView.getCurrentPosition();
+                stopBtn.setText(result);
+            }else if (result.equals(" arrive")){
+                mVideoView.seekTo(pos);
+                stopBtn.setText(result);
+            }else if (result.equals(" last")||result.equals(" Last")){
+                int tep = mVideoView.getCurrentPosition();
+                if (tep<=mov2){
+                    mVideoView.seekTo(0);
+                }else if (tep>mov2&&tep<=mov3){
+                    mVideoView.seekTo(mov1);
+                }else {
+                    mVideoView.seekTo(mov2);
+                }
+                stopBtn.setText(result);
+            }else if (result.equals(" next")||result.equals(" Next")){
+                int tep = mVideoView.getCurrentPosition();
+                if (tep<mov1){
+                    mVideoView.seekTo(mov1);
+                }else if (tep>=mov1&&tep<=mov2){
+                    mVideoView.seekTo(mov2);
+                }else {
+                    mVideoView.seekTo(mov3);
+                }
+//                speecher tts = new speecher();
+//                tts.speak("neck tilt and look to shoulder(left)",TextToSpeech.QUEUE_FLUSH, null,null);
+
+                stopBtn.setText(result);
+            }else if (result.equals(" again")){
+                int tep = mVideoView.getCurrentPosition();
+                if (tep<mov1){
+                    mVideoView.seekTo(0);
+                }else if (tep>=mov1&&tep<mov2){
+                    mVideoView.seekTo(mov1);
+                }else if (tep>=mov2&&tep<mov3){
+                    mVideoView.seekTo(mov2);
+                }else{
+                    mVideoView.seekTo(mov3) ;
+                }
+                stopBtn.setText(result);
+            }else if (result.equals(" over")){
+                mVideoView.seekTo(mVideoView.getDuration());
+                stopBtn.setText(result);
+            }else if (result.equals(" go on")){
+                int end  =mVideoView.getDuration();
+                int cur = mVideoView.getCurrentPosition();
+                int targe = (cur+10000>end)
+                        ?end:(cur+10000);
+                mVideoView.seekTo(targe);
+                stopBtn.setText(result);
+            }else if (result.equals(" go down")){
+                mVideoView.seekTo((mVideoView.getCurrentPosition()-10000<0)?0:(mVideoView.getCurrentPosition()-10000));
+                stopBtn.setText(result);
+            }
+        }
+    }
+    @Override
+    public void onTotalResult(String result,boolean isLast) {
+//        tvSendCmdResult.append(result);
+    }
+
 
 //状态栏的高度
     //    int statusBarHeight = getStatusBarHeight();
@@ -144,10 +295,11 @@ public class BtActivity
         return statusBarHeight;
     }
 
+
     class mClick implements OnClickListener {
         @Override
         public void onClick(View v) {
-            String uri = "android.resource://" + getPackageName() + "/" + R.raw.vid_bigbuckbunny;  //本地
+            String uri = "android.resource://" + getPackageName() + "/" + R.raw.sample;  //本地
             //String uri2 = "https://flv2.bn.netease.com/videolib1/1811/26/OqJAZ893T/HD/OqJAZ893T-mobile.mp4";  //网络
             mVideoView.setVideoURI(Uri.parse(uri));  //本地
             //mVideoView.setVideoURI(Uri.parse(uri2));  //网络
@@ -324,58 +476,58 @@ public class BtActivity
     }
 
 
-    @Override
-    public void onVolumeChanged(int i, byte[] bytes) {
-
-    }
-
-    @Override
-    public void onBeginOfSpeech() {
-
-    }
-
-    @Override
-    public void onEndOfSpeech() {
-
-    }
+//    @Override
+//    public void onVolumeChanged(int i, byte[] bytes) {
+//
+//    }
+//
+//    @Override
+//    public void onBeginOfSpeech() {
+//
+//    }
+//
+//    @Override
+//    public void onEndOfSpeech() {
+//
+//    }
 
     public void setRecognizeListener(RecognizeListener recognizeListener) {
         this.recognizeListener = recognizeListener;
     }
 
-    @Override
-    public void onResult(RecognizerResult recognizerResult, boolean b) {
-        if (recognizeListener != null) {
-            String text = JsonParser.parseIatResult(recognizerResult.getResultString());
-            String sn = null;
-            // 读取json结果中的sn字段
-            try {
-                JSONObject resultJson = new JSONObject(recognizerResult.getResultString());
-                sn = resultJson.optString("sn");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if (!TextUtils.isEmpty(text)) {
-                charBufffer.append(text);
-            }
-            if(text.equals("你好")){
-                Log.d(TAG, "我听到了");
-
-            }
-
-            //recognizeListener.onTotalResult(charBufffer.toString(), iat.isListening());
-        }
-    }
+//    @Override
+//    public void onResult(RecognizerResult recognizerResult, boolean b) {
+//        if (recognizeListener != null) {
+//            String text = JsonParser.parseIatResult(recognizerResult.getResultString());
+//            String sn = null;
+//            // 读取json结果中的sn字段
+//            try {
+//                JSONObject resultJson = new JSONObject(recognizerResult.getResultString());
+//                sn = resultJson.optString("sn");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            if (!TextUtils.isEmpty(text)) {
+//                charBufffer.append(text);
+//            }
+//            if(text.equals("你好")){
+//                Log.d(TAG, "我听到了");
+//
+//            }
+//
+//            //recognizeListener.onTotalResult(charBufffer.toString(), iat.isListening());
+//        }
+//    }
 
     @Override
     public void onError(SpeechError speechError) {
         Toast.makeText(this,"出错了 $speechError",Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onEvent(int i, int i1, int i2, Bundle bundle) {
-
-    }
+//    @Override
+//    public void onEvent(int i, int i1, int i2, Bundle bundle) {
+//
+//    }
 
     @Override
     public void onError(String errorMsg) {
