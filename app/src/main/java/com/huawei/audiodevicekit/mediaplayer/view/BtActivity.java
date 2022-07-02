@@ -87,9 +87,9 @@ public class BtActivity
     private Button playBtn, stopBtn;
     private TextView testbar;
     private int pos = 0;
-    private int mov1 = 20000;
-    private int mov2 = 25000;
-    private int mov3 = 40000;
+    private int mov1 = 47000;
+    private int mov2 = 137000;
+    private int mov3 = 317000;
     MediaController mMediaController;
 
     public BtActivity() {

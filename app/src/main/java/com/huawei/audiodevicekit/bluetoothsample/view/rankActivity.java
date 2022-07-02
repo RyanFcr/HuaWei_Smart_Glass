@@ -14,6 +14,7 @@ import com.huawei.audiodevicekit.bluetoothsample.view.SampleBtActivity;
 
 public class rankActivity extends AppCompatActivity {
     private Button btn_video;
+    private Button btn_glass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +24,20 @@ public class rankActivity extends AppCompatActivity {
         btn_video = (Button) findViewById(R.id.btn_video);
         btn_video.setOnClickListener(new ButtonListener());
 
+        btn_glass = (Button) findViewById(R.id.btn_glass);
+        btn_glass.setOnClickListener(new ButtonListener());
+
     }
     class ButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
-            intent.setClass(rankActivity.this, SampleBtActivity.class);
+            if(v.getId()==R.id.btn_video) {
+                intent.setClass(rankActivity.this, home_Activity.class);
+            }else if(v.getId()==R.id.btn_glass)
+            {
+                intent.setClass(rankActivity.this, SampleBtActivity.class);
+            }
             startActivity(intent);
         }
     }
