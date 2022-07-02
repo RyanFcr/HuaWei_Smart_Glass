@@ -3,15 +3,10 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,29 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.huawei.audiobluetooth.api.ATCmdApi;
 import com.huawei.audiobluetooth.api.Cmd;
 import com.huawei.audiobluetooth.api.data.SensorData;
-import com.huawei.audiobluetooth.layer.data.entity.IRspListener;
 import com.huawei.audiobluetooth.layer.protocol.mbb.DeviceInfo;
-import com.huawei.audiobluetooth.utils.BluetoothUtils;
-import com.huawei.audiobluetooth.utils.DateUtils;
 import com.huawei.audiobluetooth.utils.LocaleUtils;
 import com.huawei.audiobluetooth.utils.LogUtils;
 import com.huawei.audiodevicekit.R;
-import com.huawei.audiodevicekit.bluetoothsample.model.RecognizeListener;
 import com.huawei.audiodevicekit.bluetoothsample.model.VoiceRecognition;
 import com.huawei.audiodevicekit.bluetoothsample.contract.SampleBtContract;
 import com.huawei.audiodevicekit.bluetoothsample.presenter.SampleBtPresenter;
 import com.huawei.audiodevicekit.bluetoothsample.view.adapter.SingleChoiceAdapter;
 import com.huawei.audiodevicekit.mediaplayer.view.BtActivity;
 import com.huawei.audiodevicekit.mvp.view.support.BaseAppCompatActivity;
-import com.iflytek.cloud.SpeechError;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.zip.Inflater;
 
 public class SampleBtActivity
         extends BaseAppCompatActivity<SampleBtContract.Presenter, SampleBtContract.View>
@@ -91,6 +78,8 @@ public class SampleBtActivity
 
     public Intent checktrans;
 
+    private Button btnmain;
+
     public SampleBtActivity() {
     }
 
@@ -128,13 +117,14 @@ public class SampleBtActivity
 //        tvDataCount = findViewById(R.id.tv_data_count);
 //        listView = findViewById(R.id.listview);
         btnSearch = findViewById(R.id.btn_search);
-        btnConnect = findViewById(R.id.btn_connect);
+//        btnConnect = findViewById(R.id.btn_connect);
         btnDisconnect = findViewById(R.id.btn_disconnect);
 //        spinner = findViewById(R.id.spinner);
         btnRecognition = findViewById(R.id.btn_recognition);
         rvFoundDevice = findViewById(R.id.found_device);
 //        test_block = findViewById(R.id.testblock);
         switch_media = findViewById(R.id.switch_media);
+        btnmain = findViewById(R.id.btn_main);
 //        test_block.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -210,18 +200,27 @@ public class SampleBtActivity
     @Override
     protected void setOnclick() {
         super.setOnclick();
-        btnConnect.setOnClickListener(v -> getPresenter().connect(mMac));
-        btnDisconnect.setOnClickListener(v -> getPresenter().disConnect(mMac));
+//        btnConnect.setOnClickListener(v -> getPresenter().connect(mMac));
+        btnDisconnect.setOnClickListener(v -> getPresenter().disConnect(mMa`c));
         btnSearch.setOnClickListener(v -> getPresenter().checkLocationPermission(this));
-        switch_media.setOnClickListener(new View.OnClickListener() {
+        btnmain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                trans = new Intent(SampleBtActivity.this, BtActivity.class);
+                Intent to_main = new Intent(SampleBtActivity.this, home_Activity.class);
 
 //                startActivityForResult(MediaIntent,1);
-                startActivity(trans);
+                startActivity(to_main);
             }
         });
+//        switch_media.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                trans = new Intent(SampleBtActivity.this, BtActivity.class);
+//
+////                startActivityForResult(MediaIntent,1);
+//                startActivity(trans);
+//            }
+//        });
 
 //        btnRecognition.setOnClickListener(VoiceRecognition.instance());
     }

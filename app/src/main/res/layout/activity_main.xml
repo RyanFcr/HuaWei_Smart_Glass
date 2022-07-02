@@ -88,4 +88,14 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-2dp" />
 
+    <Button
+        android:id="@+id/btn_main"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="InvalidId,MissingConstraints"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="794dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
