@@ -94,7 +94,7 @@
         android:id="@+id/btnrank"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:visibility="invisible"
+        android:background="#00000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.341"
