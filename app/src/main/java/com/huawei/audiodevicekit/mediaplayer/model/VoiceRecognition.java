@@ -178,10 +178,10 @@ public class VoiceRecognition extends Activity implements View.OnClickListener, 
         //iat.setParameter("view_tips_plain","false");
 
         // 设置语音前端点:静音超时时间，即用户多长时间不说话则当做超时处理
-        iat.setParameter(SpeechConstant.VAD_BOS, "10000");
+        iat.setParameter(SpeechConstant.VAD_BOS, "1000000");
 
         // 设置语音后端点:后端点静音检测时间，即用户停止说话多长时间内即认为不再输入，自动停止录音
-        iat.setParameter(SpeechConstant.VAD_EOS, "10000");
+        iat.setParameter(SpeechConstant.VAD_EOS, "1000000");
 
         // 设置标点符号,设置为"0"返回结果无标点,设置为"1"返回结果有标点
         iat.setParameter(SpeechConstant.ASR_PTT, "0");
