@@ -46,7 +46,22 @@ Users should first build APK in Android Studio and install it. In App, Users can
 
 ### Contribution
 
-- Fcr：主要负责视频播放器 100
-- Zxy：主要负责语音处理 100
-- Hxl：主要负责进度条控制 100
-- UI 由三位共同完成
+- Fcr：100
+  - MediaPlayer function
+  - Main fragment
+  - Implement the front end of UI
+- Zxy：100
+  - Voice recognition and record function 
+  - TextToSpeech function
+  - Implement the front end of UI
+- Hxl：100
+  - video process control
+  - Implement the front end of UI
+- Jxy:
+  - UI design
+  - StoryLine
+  - Video
+- Wy
+  - Persona
+  - StoryLine
+  - pre
