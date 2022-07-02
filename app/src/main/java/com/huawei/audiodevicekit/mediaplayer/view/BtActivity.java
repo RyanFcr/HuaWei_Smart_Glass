@@ -245,14 +245,14 @@ public class BtActivity
             }else if (result.equals(" over")){
                 mVideoView.seekTo(mVideoView.getDuration());
                 stopBtn.setText(result);
-            }else if (result.equals(" go on")){
+            }else if (result.equals(" forward")){
                 int end  =mVideoView.getDuration();
                 int cur = mVideoView.getCurrentPosition();
                 int targe = (cur+10000>end)
                         ?end:(cur+10000);
                 mVideoView.seekTo(targe);
                 stopBtn.setText(result);
-            }else if (result.equals(" go down")){
+            }else if (result.equals(" back")){
                 mVideoView.seekTo((mVideoView.getCurrentPosition()-10000<0)?0:(mVideoView.getCurrentPosition()-10000));
                 stopBtn.setText(result);
             }
