@@ -86,10 +86,10 @@ public class BtActivity
     private VideoView mVideoView;
     private Button playBtn, stopBtn;
     private TextView testbar;
-    private int pos = 0;
-    private int mov1 = 47000;
-    private int mov2 = 137000;
-    private int mov3 = 317000;
+    private int pos = 354000;
+    private int mov1 = 324000;
+    private int mov2 = 354000;
+    private int mov3 = 384000;
     MediaController mMediaController;
 
     public BtActivity() {
@@ -184,7 +184,6 @@ public class BtActivity
         });
 
 
-//        mMediaController.setPrevNextListeners(mVideoView.setOnClickListener(););
     }
     @Override
     public void onNewResult(String result) {
@@ -201,7 +200,7 @@ public class BtActivity
             }else if (result.equals(" resume")){
                 mVideoView.seekTo(0);
                 stopBtn.setText(result);
-            }else if (result.equals(" reserve")){
+            }else if (result.equals(" mark")){
                 pos = mVideoView.getCurrentPosition();
                 stopBtn.setText(result);
             }else if (result.equals(" arrive")){
@@ -355,33 +354,6 @@ public class BtActivity
 ////        listView.setAdapter(simpleAdapter);
 //        int a=0;
     }
-
-
-//
-//    private void initRecyclerView() {
-//        SingleChoiceAdapter.SaveOptionListener mOptionListener = new SingleChoiceAdapter.SaveOptionListener() {
-//            @Override
-//            public void saveOption(String optionText, int pos) {
-//                LogUtils.i(TAG, "saveOption optionText = " + optionText + ",pos = " + pos);
-//                mMac = optionText.substring(1, 18);
-//                boolean connected = getPresenter().isConnected(mMac);
-//                if (connected) {
-//                    getPresenter().disConnect(mMac);
-//                } else {
-//                    getPresenter().connect(mMac);
-//                }
-//            }
-//
-//            @Override
-//            public void longClickOption(String optionText, int pos) {
-//                LogUtils.i(TAG, "longClickOption optionText = " + optionText + ",pos = " + pos);
-//            }
-//        };
-//        mAdapter = new SingleChoiceAdapter(this, new ArrayList<>());
-//        mAdapter.setSaveOptionListener(mOptionListener);
-//        rvFoundDevice.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-//        rvFoundDevice.setAdapter(mAdapter);
-//    }
 
     @Override
     protected void initData() {
