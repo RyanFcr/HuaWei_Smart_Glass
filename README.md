@@ -2,7 +2,7 @@
 
 NUS-HCI Summer Bootcamp of Future Interaction for Huawei Smart Glasses
 
-We are <EASY-X> (Easy to exercise)
+We are EASY-X (Easy to exercise)
 
 Here is the video link
 
